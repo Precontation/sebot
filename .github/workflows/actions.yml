@@ -8,11 +8,12 @@ on:
 
 env:
   DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-  GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+  MODAL_BEARER_TOKEN: ${{ secrets.MODAL_BEARER_TOKEN }}
+  MODAL_URL: ${{ secrets.MODAL_URL }}
 
 concurrency:
   cancel-in-progress: true
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   build:
@@ -23,10 +24,10 @@ jobs:
 
       - uses: astral-sh/setup-uv@v6
         with:
-          python-version: "3.12"
+          python-version: "3.14"
           enable-cache: true
 
-      - run: uv pip install --system -r requirements.txt
+      - run: uv sync --frozen
 
       - name: Execute Python script
-        run: uv run --no-project python main.py
+        run: uv run python main.py
