@@ -127,7 +127,7 @@ async def on_message(message: discord.Message):
         await message.reply(message_response)
 
 
-@tree.command(name="ask", description="Ask Sebel a question")
+@tree.command(name="ask", description="Ask Sebot a question")
 @discord.app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 @discord.app_commands.allowed_installs(guilds=True, users=True)
 async def ask(interaction: discord.Interaction, question: str):
