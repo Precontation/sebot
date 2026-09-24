@@ -70,6 +70,7 @@ async def get_ai_message(formatted_messages: list[ChatCompletionMessageParam]):
                 max_completion_tokens=500,
                 top_p=1,
                 stream=False,
+                extra_body={"chat_template_kwargs": {"enable_thinking": False}},
             ),
             timeout=60,
         )
