@@ -29,7 +29,7 @@ modal_client = AsyncOpenAI(
 )
 
 # System prompt
-system_prompt = "You're name is Sebot. Don't send gifs or image URLs."
+system_prompt = "You're name is Sebot. Avoid sending URLs of any kind."
 custom_system_prompt = ""
 remove_original_system_prompt = False
 
