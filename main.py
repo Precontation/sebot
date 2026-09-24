@@ -36,7 +36,7 @@ remove_original_system_prompt = False
 # Consts
 ERROR_MESSAGE = "An error occurred :("
 ASSISTANT_MESSAGE_PREFIX = "Sebot: "
-OWNER_USER_ID = 766046835109789716
+OWNER_USER_IDS = [766046835109789716, 1004100811481170010]
 MAX_CONTEXT_MESSAGES = 5
 AI_MODEL = "Precontation/sebot-hf"
 
@@ -152,7 +152,7 @@ async def set_prompt(
     global custom_system_prompt
     global remove_original_system_prompt
 
-    if interaction.user.id != OWNER_USER_ID:
+    if interaction.user.id not in OWNER_USER_IDS:
         await interaction.response.send_message(
             f"nuh uh you no dont use", ephemeral=True
         )
