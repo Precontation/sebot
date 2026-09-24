@@ -71,7 +71,7 @@ async def get_ai_message(formatted_messages: list[ChatCompletionMessageParam]):
                 top_p=1,
                 stream=False,
             ),
-            timeout=120,
+            timeout=60,
         )
     except Exception as e:
         print(f"Modal failed! Error: {e}")
