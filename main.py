@@ -2,7 +2,7 @@ import discord
 import dotenv
 import os
 import asyncio
-from openai import AsyncOpenAI
+from openai import AsyncOpenAI, APIStatusError
 from openai.types.chat import ChatCompletionMessageParam
 
 dotenv.load_dotenv()
@@ -74,6 +74,14 @@ async def get_ai_message(formatted_messages: list[ChatCompletionMessageParam]):
             ),
             timeout=60,
         )
+    except APIStatusError as e:
+        if e.status_code == 503:
+            print("Model is waking up...")
+            return "Waking up... try again in a min or two :3"
+
+        print(f"Modal failed! HTTP {e.status_code}: {e}")
+        return ERROR_MESSAGE
+
     except Exception as e:
         print(f"Modal failed! Error: {e}")
         return ERROR_MESSAGE
