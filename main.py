@@ -30,8 +30,6 @@ modal_client = AsyncOpenAI(
 
 # System prompt
 system_prompt = "You're name is Sebot. Avoid sending URLs of any kind."
-custom_system_prompt = ""
-remove_original_system_prompt = False
 
 # Consts
 ERROR_MESSAGE = "An error occurred :("
@@ -44,14 +42,6 @@ AI_MODEL = "Precontation/sebot-hf"
 async def get_ai_message(formatted_messages: list[ChatCompletionMessageParam]):
     try:
         prompt = f"{system_prompt}\nWhen referring to users, use their name without an @ symbol. User messages may be formatted as Username: message. The text before the first colon is the speaker's username and is not part of what they said."
-
-        if remove_original_system_prompt:
-            prompt = custom_system_prompt
-        elif custom_system_prompt != "":
-            prompt += (
-                "\n\nIn addition to the system prompt, a custom one was added: "
-                + custom_system_prompt
-            )
 
         formatted_prompt: ChatCompletionMessageParam = {
             "role": "system",
@@ -146,32 +136,6 @@ async def ask(interaction: discord.Interaction, question: str):
 
     await interaction.followup.send(
         f"{interaction.user.display_name}: {question}\n{ASSISTANT_MESSAGE_PREFIX}{message_response}"
-    )
-
-
-@tree.command(
-    name="set_prompt", description="YOU DONT GET TO USE ONLY I DO ASKDLFJALSDKJF"
-)
-@discord.app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-@discord.app_commands.allowed_installs(guilds=True, users=True)
-async def set_prompt(
-    interaction: discord.Interaction, prompt: str = "", replace_original: bool = False
-):
-    global custom_system_prompt
-    global remove_original_system_prompt
-
-    if interaction.user.id not in OWNER_USER_IDS:
-        await interaction.response.send_message(
-            f"nuh uh you no dont use", ephemeral=True
-        )
-        return
-
-    custom_system_prompt = prompt
-    remove_original_system_prompt = replace_original
-
-    await interaction.response.send_message(
-        f"k set 🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪🫪",
-        ephemeral=True,
     )
 
 
