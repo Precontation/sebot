@@ -28,10 +28,8 @@ modal_client = AsyncOpenAI(
     api_key=MODAL_BEARER_TOKEN,
 )
 
-# System prompt
-system_prompt = "You're name is Sebot. Avoid sending URLs of any kind."
-
 # Consts
+SYSTEM_PROMPT = "You're name is Sebot."
 ERROR_MESSAGE = "An error occurred :("
 ASSISTANT_MESSAGE_PREFIX = "Sebot: "
 OWNER_USER_IDS = [766046835109789716, 1004100811481170010]
@@ -41,11 +39,9 @@ AI_MODEL = "Precontation/sebot-hf"
 
 async def get_ai_message(formatted_messages: list[ChatCompletionMessageParam]):
     try:
-        prompt = f"{system_prompt}\nWhen referring to users, use their name without an @ symbol. User messages may be formatted as Username: message. The text before the first colon is the speaker's username and is not part of what they said."
-
         formatted_prompt: ChatCompletionMessageParam = {
             "role": "system",
-            "content": prompt,
+            "content": SYSTEM_PROMPT,
         }
 
         messages: list[ChatCompletionMessageParam] = [
