@@ -34,7 +34,7 @@ ERROR_MESSAGE = "An error occurred :("
 ASSISTANT_MESSAGE_PREFIX = "Sebot: "
 OWNER_USER_IDS = [766046835109789716, 1004100811481170010]
 MAX_CONTEXT_MESSAGES = 5
-AI_MODEL = "Precontation/sebot-hf"
+AI_MODEL = "Precontation/sebot-w4a16"
 
 
 async def get_ai_message(formatted_messages: list[ChatCompletionMessageParam]):
