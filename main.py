@@ -57,7 +57,7 @@ async def get_ai_message(formatted_messages: list[ChatCompletionMessageParam]):
                 model=AI_MODEL,
                 messages=messages,
                 temperature=0.6,
-                max_completion_tokens=500,
+                max_completion_tokens=100,
                 top_p=1,
                 stream=False,
                 extra_body={"chat_template_kwargs": {"enable_thinking": False}},
