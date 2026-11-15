@@ -123,7 +123,7 @@ async def on_message(message: discord.Message):
                 formattedMessages.append({"role": "user", "content": content})
 
         message_response = await get_ai_message(formattedMessages)
-        await message.reply(message_response)
+        await message.reply(message_response[:2000])
 
 
 @tree.command(name="ask", description="Ask Sebot a question")
@@ -135,7 +135,9 @@ async def ask(interaction: discord.Interaction, question: str):
     message_response = await get_ai_message([{"role": "user", "content": question}])
 
     await interaction.followup.send(
-        f"{interaction.user.display_name}: {question}\n{ASSISTANT_MESSAGE_PREFIX}{message_response}"
+        f"{interaction.user.display_name}: {question}\n{ASSISTANT_MESSAGE_PREFIX}{message_response}"[
+            :2000
+        ]
     )
 
 
